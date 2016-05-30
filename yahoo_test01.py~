@@ -12,6 +12,6 @@ print len(tickers)
 	
 data=getHistoricalData('TSLA', 7)
 
-print data[0]['Volume']
+print data[0]
 
 
