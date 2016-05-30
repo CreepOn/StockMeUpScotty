@@ -9,11 +9,11 @@ os.system('clear')
 
 def SMA(listdata, samples):
 	sma=listdata[(samples-1):,0]
-	i=0
-	while i<5:
-		temp=movingAverage(map(float, listdata[0:,i]),samples)
-		i+=1
-		sma=[sma,array(temp)]
+	#i=0
+	#while i<5:
+	#	temp=movingAverage(map(float, listdata[0:,i]),samples)
+	#	i+=1
+	#	sma=[sma,array(temp)]
 	return sma
 
 #tickers=get_C20()
@@ -30,7 +30,5 @@ listdata=matrix(JsonToList(data))
 sma=movingAverage(map(float, listdata[0:,1]),10)
 
 print SMA(listdata,5)
-
-print np.array(SMA(listdata,5)).transpose()
 
 #CandleStickPlotting(SMA(listdata,5))

@@ -25,10 +25,8 @@ data=getHistoricalData('TSLA', 365)
 
 listdata=matrix(JsonToList(data))
 
-#print listdata[0:,0]
-
 sma=movingAverage(map(float, listdata[0:,1]),10)
 
-print SMA(listdata,5)
+#print SMA(listdata,5)
 
 #CandleStickPlotting(SMA(listdata,5))
