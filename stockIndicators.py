@@ -6,7 +6,6 @@ import time
 def movingAverage (values, timeFrame):
     # close price, no. of days
     weights = np.repeat(1.0, timeFrame)/timeFrame
-    print weights
     SMA = np.convolve(values,weights, 'valid')
     return SMA
 '''
