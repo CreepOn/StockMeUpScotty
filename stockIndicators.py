@@ -13,7 +13,7 @@ def SMA(listdata_inc, samples):
 		temp=movingAverage(tempdata,samples)						#Insert math function here
 		i+=1
 		sma=np.c_[sma, np.matrix(temp).transpose()]			#builds the matrix again
-		
+	sma=np.c_[sma, listdata[(samples-1):,5]]
 	listen=[]
 	for ele in sma:
 		listen.append(tuple(ele.tolist()[0]))						#convert to tuple list for the plotting functions

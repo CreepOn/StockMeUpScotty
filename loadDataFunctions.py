@@ -11,7 +11,8 @@ def JsonToList(hist):
 	data = []
 	for i in hist:
 		Date1 = date2num(datetime.strptime(i['Date'], "%Y-%m-%d"))
-		data.append((Date1,float(i['Open']),float(i['Close']),float(i['High']),float(i['Low'])))
+		temp = Date1, float(i['Open']), float(i['Close']), float(i['High']), float(i['Low']), float(i['Volume'])
+		data.append(temp)
 	return data
 
 def today():

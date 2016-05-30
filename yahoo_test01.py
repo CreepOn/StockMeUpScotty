@@ -12,7 +12,13 @@ os.system('clear')
 #	data=getHistoricalData(tickers[i], 4)
 #	printRawData(data)
 
-listdata=JsonToList(getHistoricalData('TSLA', 365))
+listdata=JsonToList(getHistoricalData('TSLA', 15))
 
-CandleStickPlotting(SMA(listdata,50))
+filtered=SMA(listdata,3)
+
+CandleStickPlotting(filtered)
 #CandleStickPlotting(listdata)
+
+print matrix(listdata)
+print "------------------------"
+print matrix(filtered)

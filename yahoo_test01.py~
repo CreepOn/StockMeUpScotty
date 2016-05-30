@@ -12,23 +12,13 @@ os.system('clear')
 #	data=getHistoricalData(tickers[i], 4)
 #	printRawData(data)
 
-#listdata=JsonToList(getHistoricalData('TSLA', 365))
+listdata=JsonToList(getHistoricalData('TSLA', 15))
 
-#CandleStickPlotting(SMA(listdata,50))
+filtered=SMA(listdata,3)
+
+CandleStickPlotting(filtered)
 #CandleStickPlotting(listdata)
 
-a=[1,2,3]
+print matrix(listdata)
 
-gg=[]
-
-for i in range(0,3):
-	gg.append(tuple(a))
-
-print "Tuple crap:"
-print gg
-
-
-print " "
-print "Matrix beauty:"
-print matrix(gg)
-
+print matrix(filtered)
