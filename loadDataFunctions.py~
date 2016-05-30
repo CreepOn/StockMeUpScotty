@@ -1,6 +1,13 @@
 from yahoo_finance import Share
 from datetime import datetime
 import json
+from pylab import *
+import matplotlib.pyplot as plt
+import time
+from matplotlib.dates import  DateFormatter, WeekdayLocator, HourLocator, \
+     DayLocator, MONDAY
+from matplotlib.finance import candlestick,\
+     plot_day_summary, candlestick2
 
 whiteFont="\033[0m"
 greenFont="\033[92m"
