@@ -2,8 +2,6 @@ import numpy as np
 import time
 import json
 
-def jsonMovingAverage(data, timeFrame):
-	
 
 #Simple Moving Average - SMA
 
