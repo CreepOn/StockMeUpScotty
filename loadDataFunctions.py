@@ -1,5 +1,6 @@
 from yahoo_finance import Share
-from datetime import datetime
+from pylab import *
+from datetime import *
 import json
 
 whiteFont="\033[0m"
@@ -9,20 +10,18 @@ redFont="\033[91m"
 def JsonToList(hist):
 	data = []
 	for i in hist:
-		Date1 = date2num(datetime.datetime.strptime(i['Date'], "%Y-%m-%d"))
+		Date1 = date2num(datetime.strptime(i['Date'], "%Y-%m-%d"))
 		data.append((Date1,float(i['Open']),float(i['Close']),float(i['High']),float(i['Low'])))
 	return data
 
-
-
 def today():
-	datotid=datetime.datetime.now()
+	datotid=datetime.now()
 	today = str(datotid)[0:10]
 	return today
 
 def dateDaysAgo(timeGone):
-	datotid=datetime.datetime.now()
-	then=str(datotid - datetime.timedelta(days=int(timeGone)))[0:10]
+	datotid=datetime.now()
+	then=str(datotid - timedelta(days=int(timeGone)))[0:10]
 	return then
 
 def getHistoricalData(ticker, daysAgo):

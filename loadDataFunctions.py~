@@ -1,13 +1,7 @@
 from yahoo_finance import Share
+from pylab import *
 from datetime import datetime
 import json
-from pylab import *
-import matplotlib.pyplot as plt
-import time
-from matplotlib.dates import  DateFormatter, WeekdayLocator, HourLocator, \
-     DayLocator, MONDAY
-from matplotlib.finance import candlestick,\
-     plot_day_summary, candlestick2
 
 whiteFont="\033[0m"
 greenFont="\033[92m"
@@ -19,8 +13,6 @@ def JsonToList(hist):
 		Date1 = date2num(datetime.datetime.strptime(i['Date'], "%Y-%m-%d"))
 		data.append((Date1,float(i['Open']),float(i['Close']),float(i['High']),float(i['Low'])))
 	return data
-
-
 
 def today():
 	datotid=datetime.datetime.now()
