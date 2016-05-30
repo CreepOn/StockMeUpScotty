@@ -1,6 +1,7 @@
 from yahoo_finance import Share
 from pylab import *
 from datetime import *
+import numpy as np
 import json
 
 whiteFont="\033[0m"
@@ -14,6 +15,17 @@ def JsonToList(hist):
 		temp = Date1, float(i['Open']), float(i['Close']), float(i['High']), float(i['Low']), float(i['Volume'])
 		data.append(temp)
 	return data
+
+def JsonToMatrix(hist):
+	for ele in hist:
+		Date1 = date2num(datetime.strptime(ele['Date'], "%Y-%m-%d"))
+		temp = matrix([Date1, float(ele['Open']), float(ele['Close']), float(ele['High']), float(ele['Low']), float(ele['Volume'])])
+		if 'data' in locals():
+			data=np.r_[data, temp]
+		else:
+			data=temp
+	return data
+
 
 def today():
 	datotid=datetime.now()

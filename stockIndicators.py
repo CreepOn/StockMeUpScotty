@@ -3,8 +3,7 @@ import time
 
 #Simple Moving Average - SMA
 
-def SMA(listdata_inc, samples):
-	listdata=np.matrix(listdata_inc)									#Convert tuple list to matrix to access columns
+def SMA(listdata, samples):
 	sma=listdata[(samples-1):,0]											#Save the times for used samples
 	
 	i=1
@@ -14,11 +13,8 @@ def SMA(listdata_inc, samples):
 		i+=1
 		sma=np.c_[sma, np.matrix(temp).transpose()]			#builds the matrix again
 	sma=np.c_[sma, listdata[(samples-1):,5]]
-	listen=[]
-	for ele in sma:
-		listen.append(tuple(ele.tolist()[0]))						#convert to tuple list for the plotting functions
 		
-	return listen
+	return sma
 
 def movingAverage (values, timeFrame):
     # close price, no. of days
