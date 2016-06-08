@@ -1,25 +1,6 @@
 import numpy as np
 import time
 ### skal slettes 
-
-sampleData = open('sampeldata.txt','r').read()
-splitData = sampleData.split('\n')
-
-date,closep,highp,lowp,openp,volume = np.loadtxt(splitData,delimiter=',',unpack=True)
-
-
-dataset = [1 ,5,7,2,6,7,8,5,2,6,8,2,6,13]
-open1 = 1286.50
-high1 = 1287.70
-low1 = 1278.50
-close1 = 1281.70
-open2 = 1281.80
-high2 = 1284.50
-low2 = 1260.70
-close2 = 1266.70
-limitmove = 75 
-###
-
 #Simple Moving Average - SMA
 
 def movingAverage (values, timeFrame):
@@ -566,37 +547,4 @@ def chaikinVolCalc(emaUsed,periodsAgo):
 
 
 
-
-
- 
-timeFrame = 14
-#print movingAverage(closep,20)
-#print '-----------------------'
-#print expMovingAverage(closep,20)
-#print '-----------------------'
-#print swingIndex(open1, open2, high1, high2, low1, low2, close1, close2, limitmove)
-#print '-----------------------'
-#print print ATR(TrueRanges,timeFrame)
-#print '-----------------------'
-#print TR(date,close1,high1,low1,open1,close2)
-#print '-----------------------'
-#print ADX(timeFrame)
-#print '-----------------------'
-#print aroon(20)
-#print '-----------------------'
-#print standardDeviation(timeFrame)   
-#print '-----------------------'
-#print bollingerBands(2,20)
-#print '-----------------------'
-#print centerOfGravity(date,closep,10)
-#print '-----------------------'
-#print RSI(closep,14)
-#print '-----------------------'
-#print MACD(closep,26,12,9)
-#print '-----------------------'
-#print CHMoF(date,closep,highp,lowp,openp,volume, 20)
-#print '-----------------------'
-#print chaikinVolCalc(10,10)
-print '-----------------------'
-print '#######################'
 

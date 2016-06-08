@@ -19,6 +19,7 @@ from yahoo_finance import Share
 
 def JsonToList(hist):
 	data = []
+	print hist[0]['Symbol']
 	for i in hist:
 		Date1 = date2num(datetime.strptime(i['Date'], "%Y-%m-%d"))
 		data.append((Date1,float(i['Open']),float(i['Close']),float(i['High']),float(i['Low']),int(i['Volume'])))
@@ -109,6 +110,6 @@ def CandleStickPlotting(plotdata):
 	savefig('foo.pdf', facecolor='gray', edgecolor='gray')#fig.get_facecolor()
 
 
-DSV_hist = DSV.get_historical('2016-01-01', '2016-05-29')
+#DSV_hist = DSV.get_historical('2016-01-01', '2016-05-29')
 #print DSV_hist
-CandleStickPlotting(JsonToList(DSV_hist))
+#CandleStickPlotting(JsonToList(DSV_hist))

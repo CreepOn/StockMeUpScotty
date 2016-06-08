@@ -5,21 +5,27 @@ from loadDataFunctions import *
 import numpy as np
 from stockIndicators import *
 from plots import *
+from dataobject import *
 os.system('clear')
+
 
 #tickers=get_C20()
 #for i in range(0,len(tickers)):
 #	data=getHistoricalData(tickers[i], 4)
-#	printRawData(data)
+#printRawData(data)
 
-listdata=JsonToMatrix(getHistoricalData('TSLA', 15))
+listdata=dataobject('raw', JsonToMatrix(getHistoricalData('TSLA', 10)))
 
-print listdata[:,2]
+print listdata
+print listdata.data[:,2]
+#listdata=JsonToList(getHistoricalData('TSLA', 15))
 
-filtered=SMA(listdata,3)
-print "----------------------------------------------------"
-print filtered[:,2]
+
+#filtered=SMA(listdata,50)
+#print "----------------------------------------------------"
+
 #CandleStickPlotting(filtered)
 #CandleStickPlotting(listdata)
 
+#CandleStickPlotting(listdata)
 
