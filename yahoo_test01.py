@@ -18,8 +18,9 @@ def SMA(obj, timeFrame):
 			datalist=obj.data[:,2].transpose().tolist()[0]
 		
 		returnlist=movingAverage(datalist, timeFrame)
-		returnmatrix=np.concatenate((obj.data[timeFrame:-1,0], np.matrix(returnlist).transpose()))	#returnmatrix=np.concatenate((np.matrix(obj.data[timeFrame-1:-1,0]),np.matrix(returnlist).transpose()),axis=0)
-		return returnmatrix
+		returnmatrix=np.concatenate((obj.data[(timeFrame-2):-1,0], np.matrix(returnlist).transpose()),axis=1)
+		
+		return dataobject('mov avg', returnmatrix)
 	else:
 		print "Data is not of type 'dataobject'"
 

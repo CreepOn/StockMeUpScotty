@@ -22,7 +22,7 @@ class dataobject:
 						'candlestick':'3',
 						'raw': '4'}
 		chosen_desription={'0':{'Category is unknown'},
-											'1':{'time, filter-output'},
+											'1':{time, filter-output},
 											'2':{'time, aroon-up, aroon-down'},
 											'3':{'time, Open, Close, High, Low'},
 											'4':{'time, Open, Close, High, Low, Volume'}}
