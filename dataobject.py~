@@ -17,12 +17,12 @@ class dataobject:
 		self.log = ""
 		
 	def get_description(self, cat):
-		choose={'rsi': '1', 'mov avg': '1', 'exp mov avg':'1', 'aroon-oscillator': '1', 'volume': '1',
+		choose={'asi': '1', 'rsi': '1', 'mov avg': '1', 'exp mov avg':'1', 'aroon-oscillator': '1', 'volume': '1',
 						'aroon': '2', 
 						'candlestick':'3',
 						'raw': '4'}
 		chosen_desription={'0':{'Category is unknown'},
-											'1':{time, filter-output},
+											'1':{'time, filter-output'},
 											'2':{'time, aroon-up, aroon-down'},
 											'3':{'time, Open, Close, High, Low'},
 											'4':{'time, Open, Close, High, Low, Volume'}}

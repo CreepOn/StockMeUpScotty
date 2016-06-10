@@ -17,7 +17,7 @@ class dataobject:
 		self.log = ""
 		
 	def get_description(self, cat):
-		choose={'rsi': '1', 'mov avg': '1', 'exp mov avg':'1', 'aroon-oscillator': '1', 'volume': '1',
+		choose={'tr': '1','asi': '1', 'rsi': '1', 'mov avg': '1', 'exp mov avg':'1', 'aroon-oscillator': '1', 'volume': '1',
 						'aroon': '2', 
 						'candlestick':'3',
 						'raw': '4'}
