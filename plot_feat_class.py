@@ -11,5 +11,5 @@ class Plot_feature:
 
 	def plot_get(self, *args):
 		for i in args:
-			switcher = {'ave': x.avex, 'candle': x.candlex}
+			switcher = {'ave': self.avex, 'candle': self.candlex}
 			switcher[i]()
