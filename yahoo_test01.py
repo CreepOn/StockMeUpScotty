@@ -16,18 +16,13 @@ os.system('clear')
 
 ticker='TSLA'
 
-listdata=dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker,25)))
+#listdata=dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker,25)))
 
 #print listdata
 
-ddd=SMA(listdata, 14)
-ass=EMA(listdata, 14)
+timeFrame=10
 
+weights = np.exp(np.linspace(-1.,0.,timeFrame))
+weights /= weights.sum()
 
-
-
-
-print ddd.data[0:,1]
-print ass.data[0:,1]
-
-
+print weights

@@ -56,7 +56,7 @@ def expMovingAverage(values, timeFrame):
 	weights = np.exp(np.linspace(-1.,0.,timeFrame))
 	weights /= weights.sum()
 
-	ema = np.convolve(values,weights, mode='full')[:len(values)]
+	ema = np.convolve(values,weights)[:len(values)]
 	ema[:timeFrame] = ema[timeFrame]
 	return ema
 '''
