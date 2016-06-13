@@ -150,7 +150,7 @@ def TR(obj):
 		else:
 			print "Data is not of type dataobject.'raw' or dataobject.'candlestick'"
 
-def trueRange(D,C,H,L,O,YC):
+def trueRange(C,H,L,O,YC):
     # date,close,high,low,open,yesterdays close
     x = H-L
     y = abs(H-YC)
@@ -163,7 +163,7 @@ def trueRange(D,C,H,L,O,YC):
     elif x <= z >= y:
         trueRange = z
 
-    return D,trueRange
+    return trueRange
 '''
 The true range indicator is the greatest of the following:
  -current high less the current low.

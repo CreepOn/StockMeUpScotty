@@ -4,13 +4,16 @@ class dataobject:
 	def __repr__(self):
 		return self.category
 	def __str__(self):
-		return "category: " + self.category + '\ndescription: ' + str(list(self.description)) + '\ndata: ' + str(self.data)
-	def __init__(self, Category):
+		return "ticker: "+ self.ticker +  "\ncategory: " + self.category + '\ndescription: ' + str(list(self.description)) + '\ndata: ' + str(self.data)
+	
+	def __init__(self, Ticker, Category):
+		self.ticker = Ticker
 		self.category=Category
 		self.description = self.get_description(Category)		
 		self.data = np.matrix([])
 	
-	def __init__(self, Category, mat):
+	def __init__(self, Ticker, Category, mat):
+		self.ticker = Ticker
 		self.category=Category
 		self.description = self.get_description(Category)		
 		self.data = mat
@@ -18,8 +21,9 @@ class dataobject:
 		
 	def get_description(self, cat):
 		choose={'tr': '1','asi': '1', 'rsi': '1', 'mov avg': '1', 'exp mov avg':'1', 'aroon-oscillator': '1', 'volume': '1',
-						'aroon': '2', 
-						'candlestick':'3',
+						'aroon': '2',
+						'Yet to be defined!!!': '3',
+						'candlestick':'4',
 						'raw': '4'}
 		chosen_desription={'0':{'Category is unknown'},
 											'1':{'time, filter-output'},

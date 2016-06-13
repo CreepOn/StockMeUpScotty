@@ -10,7 +10,9 @@ class Plot_feature:
 		self.candle_count+=1
 
 	def plot_get(self, *args):
-		for ele in args:
+		for i in args:
 			switcher = {'ave': self.avex, 'candle': self.candlex}
-			switcher[ele.category]()
-
+			switcher[i.category]()
+		
+def plot(self, *args):
+	plot_get(args):

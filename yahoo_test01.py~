@@ -14,11 +14,11 @@ os.system('clear')
 #	data=getHistoricalData(tickers[i], 4)
 #printRawData(data)
 
-listdata=dataobject('raw', JsonToMatrix(getHistoricalData('TSLA', 20)))
+listdata=dataobject('raw', JsonToMatrix(getHistoricalData('TSLA', 5)))
 #listdata=JsonToList(getHistoricalData('TSLA', 15))
 print listdata
 
-print ASI(listdata,220)
+print TR(listdata)
 #filtered=SMA(listdata,50)
 #print "----------------------------------------------------"
 

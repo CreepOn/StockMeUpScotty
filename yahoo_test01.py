@@ -14,7 +14,9 @@ os.system('clear')
 #	data=getHistoricalData(tickers[i], 4)
 #printRawData(data)
 
-listdata=dataobject('raw', JsonToMatrix(getHistoricalData('TSLA', 20)))
+ticker='TSLA'
+
+listdata=dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker, 5)))
 #listdata=JsonToList(getHistoricalData('TSLA', 15))
 print listdata
 

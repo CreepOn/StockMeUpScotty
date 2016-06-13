@@ -16,7 +16,7 @@ def SMA(obj, timeFrame):
 		returnlist=movingAverage(datalist, timeFrame)
 		returnmatrix=np.concatenate((obj.data[(timeFrame-2):-1,0], np.matrix(returnlist).transpose()),axis=1)
 		
-		return dataobject('mov avg', returnmatrix)
+		return dataobject(obj.ticker, 'mov avg', returnmatrix)
 	else:
 		print "Data is not of type 'dataobject'"
 		
@@ -46,7 +46,7 @@ def EMA(obj, timeFrame):
 		returnlist=expMovingAverage(datalist, timeFrame)
 		returnmatrix=np.concatenate((obj.data[(timeFrame-2):-1,0], np.matrix(returnlist).transpose()),axis=1)
 		
-		return dataobject('exp mov avg', returnmatrix)
+		return dataobject(obj.ticker, 'exp mov avg', returnmatrix)
 	else:
 		print "Data is not of type 'dataobject'"
 
@@ -80,7 +80,7 @@ def ASI(obj, limitMove):
 			for i in range(1,len(Open)):
 				output[i-1]=swingIndex(Open[i], Open[i-1], High[i], High[i-1], Low[i], Low[i-1], Close[i], Close[i-1], limitMove)
 			returnmatrix=np.concatenate((obj.data[1:,0], np.matrix(output).transpose()),axis=1)
-			return dataobject('asi', returnmatrix)
+			return dataobject(obj.ticker, 'asi', returnmatrix)
 		else:
 			print "Data is not of type dataobject.'raw' or dataobject.'candlestick'"
 
@@ -146,7 +146,7 @@ def TR(obj):
 			for i in range(1,len(Open)):
 				output[i-1]=trueRange(Open[i], Close[i], High[i], Low[i], Close[i-1])
 			returnmatrix=np.concatenate((obj.data[1:,0], np.matrix(output).transpose()),axis=1)
-			return dataobject('tr', returnmatrix)
+			return dataobject(obj.ticker, 'tr', returnmatrix)
 		else:
 			print "Data is not of type dataobject.'raw' or dataobject.'candlestick'"
 
