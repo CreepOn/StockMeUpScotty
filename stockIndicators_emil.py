@@ -42,9 +42,10 @@ def EMA(obj, timeFrame):
 		if obj.category == "raw" or obj.category == "candlestick":
 			datalist=obj.data[:,2].transpose().tolist()[0]			
 		else:
-			datalist=obj.data[:,2].transpose().tolist()[0]
-		returnlist=expMovingAverage(datalist, timeFrame)
-		returnmatrix=np.concatenate((obj.data[(timeFrame-2):-1,0], np.matrix(returnlist).transpose()),axis=1)
+			datalist=obj.data[:,1].transpose().tolist()[0]
+		returnlist=expMovingAverage(datalist, timeFrame)		
+		returnmatrix=np.concatenate((obj.data[:,0], np.matrix(returnlist).transpose()),axis=1)
+#		returnmatrix=np.concatenate((obj.data[(timeFrame-2):-1,0], np.matrix(returnlist).transpose()),axis=1)
 		
 		return dataobject(obj.ticker, 'exp mov avg', returnmatrix)
 	else:
@@ -52,12 +53,12 @@ def EMA(obj, timeFrame):
 
 def expMovingAverage(values, timeFrame):
     # close price, no. of days
-    weights = np.exp(np.linspace(-1.,0.,timeFrame))
-    weights /= weights.sum()
+	weights = np.exp(np.linspace(-1.,0.,timeFrame))
+	weights /= weights.sum()
 
-    EMA = np.convolve(values,weights, mode='full')[:len(values)]
-    EMA[:timeFrame] = EMA[timeFrame]
-    return EMA
+	ema = np.convolve(values,weights)[:len(values)]
+	ema[:timeFrame] = ema[timeFrame]
+	return ema
 '''
 What is an 'Exponential Moving Average - EMA'
 An exponential moving average (EMA) is a type of moving average that is similar to a simple moving average, except that more
@@ -174,10 +175,12 @@ The true range indicator is the greatest of the following:
 #Average True Range - ATR
     
 def ATR(TrueRanges,timeFrame):
-
-    atr = expMovingAverage(TrueRanges,timeFrame)
+		
+	temp=TR(TrueRanges)
+	#atr = expMovingAverage(TrueRanges,timeFrame)
+	atr = EMA(temp,timeFrame)
     
-    return atr
+	return atr
 
 '''
 What is the 'Average True Range - ATR'
@@ -192,61 +195,76 @@ http://www.investopedia.com/terms/a/atr.asp#ixzz49nHk82hh
 '''
 
 #Average Directional Index - ADX
+def ASI(obj, limitMove):
+	def DM(d,o,h,l,c,yo,yh,yl,yc):
+		  #date, open, high, low, close, yesterdays open, yesterdays high, yesterdays low, yesterdays close
+		  moveUp = h-yh
+		  moveDown = yl-l
 
-def DM(d,o,h,l,c,yo,yh,yl,yc):
-    #date, open, high, low, close, yesterdays open, yesterdays high, yesterdays low, yesterdays close
-    moveUp = h-yh
-    moveDown = yl-l
+		  if 0 < moveUp > moveDown:
+		      PDM = moveUp
+		  else:
+		      PDM = 0
+		  if 0 < moveDown > moveUp:
+		      NDM = moveDown
+		  else:
+		      NDM = 0
+		 
+		  return d,PDM,NDM
 
-    if 0 < moveUp > moveDown:
-        PDM = moveUp
-    else:
-        PDM = 0
-    if 0 < moveDown > moveUp:
-        NDM = moveDown
-    else:
-        NDM = 0
-   
-    return d,PDM,NDM
+	def CalcDIs(timeFrame):
+		  x = 1
+		  TRDates = []
+		  TrueRanges = []
+		  PosDMs = []
+		  NegDMs = []
 
-def CalcDIs(timeFrame):
-    x = 1
-    TRDates = []
-    TrueRanges = []
-    PosDMs = []
-    NegDMs = []
+		  while x < len(date):
+		      #TR(d,c,h,l,o,yc)
+		      TRDate,TrueRange = TR(date[x],closep[x],highp[x],lowp[x],openp[x],closep[x-1])
+		      TRDates.append(TRDate)
+		      TrueRanges.append(TrueRange)
+		      
+		      #DM(d,o,h,l,c,yo,yh,yl,yc)
+		      DMdate,PosDM,NegDM = DM(date[x],openp[x],highp[x],lowp[x],closep[x],openp[x-1],highp[x-1],lowp[x-1],closep[x-1])
+		      PosDMs.append(PosDM)
+		      NegDMs.append(NegDM)
+		      x+=1
+		  
+		  expPosDM = expMovingAverage(PosDMs,timeFrame)
+		  expNegDM = expMovingAverage(NegDMs,timeFrame)
+		  ATR = expMovingAverage(TrueRanges,timeFrame)
 
-    while x < len(date):
-        #TR(d,c,h,l,o,yc)
-        TRDate,TrueRange = TR(date[x],closep[x],highp[x],lowp[x],openp[x],closep[x-1])
-        TRDates.append(TRDate)
-        TrueRanges.append(TrueRange)
-        
-        #DM(d,o,h,l,c,yo,yh,yl,yc)
-        DMdate,PosDM,NegDM = DM(date[x],openp[x],highp[x],lowp[x],closep[x],openp[x-1],highp[x-1],lowp[x-1],closep[x-1])
-        PosDMs.append(PosDM)
-        NegDMs.append(NegDM)
-        x+=1
-    
-    expPosDM = expMovingAverage(PosDMs,timeFrame)
-    expNegDM = expMovingAverage(NegDMs,timeFrame)
-    ATR = expMovingAverage(TrueRanges,timeFrame)
+		  xx = 0
+		  PDIs = []
+		  NDIs = []
 
-    xx = 0
-    PDIs = []
-    NDIs = []
+		  while xx < len(ATR):
+		      PDI = 100*(expPosDM[xx]/ATR[xx])
+		      PDIs.append(PDI)
 
-    while xx < len(ATR):
-        PDI = 100*(expPosDM[xx]/ATR[xx])
-        PDIs.append(PDI)
+		      NDI = 100*(expNegDM[xx]/ATR[xx])
+		      NDIs.append(NDI)
 
-        NDI = 100*(expNegDM[xx]/ATR[xx])
-        NDIs.append(NDI)
-
-        xx += 1
-       
-    
-    return PDIs,NDIs
+		      xx += 1
+		     
+		  
+		  return PDIs,NDIs
+	returnlist=[]
+	datalist=[]
+	if isinstance(obj, dataobject):
+		if obj.category == "raw" or obj.category == "candlestick":
+			Open=obj.data[:,1].transpose().tolist()[0]
+			Close=obj.data[:,2].transpose().tolist()[0]
+			High=obj.data[:,3].transpose().tolist()[0]
+			Low=obj.data[:,4].transpose().tolist()[0]
+			output=[0]*(len(Open)-1)
+			for i in range(1,len(Open)):
+				output[i-1]=swingIndex(Open[i], Open[i-1], High[i], High[i-1], Low[i], Low[i-1], Close[i], Close[i-1], limitMove)
+			returnmatrix=np.concatenate((obj.data[1:,0], np.matrix(output).transpose()),axis=1)
+			return dataobject(obj.ticker, 'asi', returnmatrix)
+		else:
+			print "Data is not of type dataobject.'raw' or dataobject.'candlestick'"
 
 def ADX(timeFrame):
     PositiveDI,NegativeDI = CalcDIs(timeFrame)
@@ -263,6 +281,8 @@ def ADX(timeFrame):
     ADX = expMovingAverage(DXs, timeFrame)
 
     return PositiveDI,NegativeDI,ADX
+	
+	
 '''
 What is the 'Average Directional Index - ADX'
 The average directional index (ADX) is an indicator used in technical analysis as an objective value for the

@@ -16,17 +16,18 @@ os.system('clear')
 
 ticker='TSLA'
 
-listdata=dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker, 5)))
-#listdata=JsonToList(getHistoricalData('TSLA', 15))
-print listdata
+listdata=dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker,25)))
 
-print TR(listdata)
-#filtered=SMA(listdata,50)
-#print "----------------------------------------------------"
+#print listdata
 
-#CandleStickPlotting(filtered)
-#CandleStickPlotting(listdata)
+ddd=SMA(listdata, 14)
+ass=EMA(listdata, 14)
 
-#CandleStickPlotting(listdata)
+
+
+
+
+print ddd.data[0:,1]
+print ass.data[0:,1]
 
 
