@@ -6,6 +6,7 @@ import numpy as np
 from stockIndicators_emil import *
 from plots import *
 from dataobject import *
+from pylab import *
 os.system('clear')
 
 def movAveAna(obj, slowMovDays, fastMovDays):
@@ -19,8 +20,14 @@ def movAveAna(obj, slowMovDays, fastMovDays):
 	for i in range(0,len(slow.data)):
 		if slow.data[i,0]==fast.data[lendiff+i,0]:
 			diff.append([slow.data[i,0],slow.data[i,1]-fast.data[lendiff+i,1]])
-	print np.diff(np.matrix(diff)[:,1][0])
-	#return dataobject(obj.ticker, 'diff', np.matrix(diff))
+	diff=np.matrix(diff)
+	for i in range(0,len(diff)-1):
+		if diff[i,1]*diff[i+1,1]<0:
+			if diff[i,1]<0:
+				goldenCross.append(diff[i+1, 0].tolist())
+			elif diff[i+1,1]<0:
+				deathCross.append(diff[i, 0].tolist())
+	return np.matrix(goldenCross), np.matrix(deathCross), dataobject(obj.ticker, 'diff', np.matrix(diff))
 					
 
 
@@ -29,14 +36,28 @@ def movAveAna(obj, slowMovDays, fastMovDays):
 #	data=getHistoricalData(tickers[i], 4)
 #printRawData(data)
 
-ticker='TSLA'
+ticker='DENERG.CO'
 
-listdata=dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker,50)))
-#print listdata
-
-#ema=EMA(listdata,11)
-
-movAveAna(listdata,20,5)
+listdata=dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker,400)))
 
 
-#print ema.data[:,1]
+gc,dc,df=movAveAna(listdata,200,50)
+
+if len(gc.tolist())>0:
+	print "golden cross: "
+	for ele in gc:
+		try:
+			hel=int(ele)
+			print str(num2date(int(hel)))
+		except:
+			print "empty"
+if len(dc)>0:
+	print "---------------------------------------"
+	print "death cross: "
+	for ele in dc:
+		try:
+			hel=int(ele)
+			print str(num2date(int(hel)))
+		except:
+			print "empty"
+

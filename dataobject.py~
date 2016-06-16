@@ -1,17 +1,15 @@
-import matplotlib
-from matplotlib.dates import  DateFormatter, WeekdayLocator, HourLocator, \
-     DayLocator, MONDAY
 import numpy as np
 from datetime import datetime
 from datetime import date
+from pylab import *
 import time
 
 class dataobject:
 	def __repr__(self):
 		return self.category
 	def __str__(self):
-		return "ticker: "+ self.ticker +  "\ncategory: " + self.category + '\ndescription: ' + str(list(self.description)) + '\ndata: ' + str(datetime.date(num2date(self.data[:,0])))
-	
+		return "ticker: "+ self.ticker +  "\ncategory: " + self.category + '\ndescription: ' + str(list(self.description)) + '\ndata: ' + str(self.data)
+		
 	def __init__(self, Ticker, Category):
 		self.ticker = Ticker
 		self.category=Category
