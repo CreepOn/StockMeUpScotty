@@ -12,7 +12,7 @@ def SMA(obj, timeFrame):
 		if obj.category == "raw" or obj.category == "candlestick":
 			datalist=obj.data[:,2].transpose().tolist()[0]			
 		else:
-			datalist=obj.data[:,2].transpose().tolist()[0]
+			datalist=obj.data[:,1].transpose().tolist()[0]
 		returnlist=movingAverage(datalist, timeFrame)
 		returnmatrix=np.concatenate((obj.data[(timeFrame-2):-1,0], np.matrix(returnlist).transpose()),axis=1)
 		

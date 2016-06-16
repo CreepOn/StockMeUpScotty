@@ -8,6 +8,21 @@ from plots import *
 from dataobject import *
 os.system('clear')
 
+def movAveAna(obj, slowMovDays, fastMovDays):
+	slow=SMA(obj, slowMovDays)
+	fast=SMA(obj, fastMovDays)
+	
+	lendiff=len(fast.data)-len(slow.data)
+	diff=[];
+	goldenCross=[];
+	deathCross=[];
+	for i in range(0,len(slow.data)):
+		if slow.data[i,0]==fast.data[lendiff+i,0]:
+			diff.append([slow.data[i,0],slow.data[i,1]-fast.data[lendiff+i,1]])
+	print np.matrix(diff)[:,1]
+	#return dataobject(obj.ticker, 'diff', np.matrix(diff))
+					
+
 
 #tickers=get_C20()
 #for i in range(0,len(tickers)):
@@ -16,11 +31,12 @@ os.system('clear')
 
 ticker='TSLA'
 
-#listdata=dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker,25)))
-
+listdata=dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker,50)))
 #print listdata
 
-timeFrame=10
+#ema=EMA(listdata,11)
 
-weights = np.exp(np.linspace(-1.,0.,timeFrame))
-weights /= weights.sum()
+movAveAna(listdata,20,5)
+
+
+#print ema.data[:,1]
