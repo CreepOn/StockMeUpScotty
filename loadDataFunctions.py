@@ -17,15 +17,18 @@ def JsonToList(hist):
 	return data
 
 def JsonToMatrix(hist):
-	for ele in hist:
-		Date1 = date2num(datetime.strptime(ele['Date'], "%Y-%m-%d"))
-		temp = matrix([Date1, float(ele['Open']), float(ele['Close']), float(ele['High']), float(ele['Low']), float(ele['Volume'])])
-		if 'data' in locals():
-			data=np.r_[data, temp]
-		else:
-			data=temp
-	return data
-
+	try:
+		for ele in hist:
+			Date1 = date2num(datetime.strptime(ele['Date'], "%Y-%m-%d"))
+			temp = matrix([Date1, float(ele['Open']), float(ele['Close']), float(ele['High']), float(ele['Low']), float(ele['Volume'])])
+			if 'data' in locals():
+				data=np.r_[data, temp]
+			else:
+				data=temp
+		return data
+	except:
+		print redFont+"Stock does not exist"+whiteFont
+		return matrix([])
 
 def today():
 	datotid=datetime.now()
