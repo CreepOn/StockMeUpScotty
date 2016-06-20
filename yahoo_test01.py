@@ -22,7 +22,7 @@ def movAveAna(obj, slowMovDays, fastMovDays):
 	except:
 		print redFont+"History not long enough for slow window."+whiteFont
 	try:
-		fast=EMA(obj, fastMovDays)#SMA(obj, fastMovDays)
+		fast=SMA(obj, fastMovDays)#SMA(obj, fastMovDays)
 		startup+=1
 	except:
 		print redFont+ "History not long enough for fast window"+whiteFont
