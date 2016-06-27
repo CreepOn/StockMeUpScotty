@@ -27,12 +27,14 @@ class dataobject:
 						'aroon': '2',
 						'Yet to be defined!!!': '3',
 						'candlestick':'4',
-						'raw': '4'}
+						'raw': '4',
+						'sto osc': '5'}
 		chosen_desription={'0':{'Category is unknown'},
 											'1':{'time, filter-output'},
 											'2':{'time, aroon-up, aroon-down'},
 											'3':{'time, Open, Close, High, Low'},
-											'4':{'time, Open, Close, High, Low, Volume'}}
+											'4':{'time, Open, Close, High, Low, Volume'},
+											'5':{'time, fast, slow'}}
 		val='0'
 		try:
 			val=choose[cat]
