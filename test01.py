@@ -16,8 +16,8 @@ os.system('clear')
 
 ticker='TSLA'
 
-ld=getDataObject(ticker,100)
+ld=getDataObject(ticker,300)
 
 rss=RSI(ld, 14)
-print rss
+print rss.data[:,1]
 #print SO(ld, 14,3).data[:,1:]
