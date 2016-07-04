@@ -5,7 +5,6 @@ from dataobject import *
 #Stocastic Oscillator
 
 def SO(obj, period, ave):
-	
 	if isinstance(obj, dataobject):
 		K=[]
 		D=[]
@@ -510,7 +509,23 @@ def centerOfGravity(dates, data, timeFrame):
 
 # Relative Strength Index - RSI
 
-def RSI(prices, n):
+def RSI(obj, days):
+	returnlist=[]
+	datalist=[]
+	if isinstance(obj, dataobject):
+		if obj.category == "raw" or obj.category == "candlestick":
+			datalist=obj.data[:,2].transpose().tolist()[0]			
+		else:
+			datalist=obj.data[:,1].transpose().tolist()[0]
+		returnlist=RelativeStrengthIndex(datalist, days)
+		returnmatrix=np.concatenate((obj.data[:,0], np.matrix(returnlist).transpose()),axis=1)
+		
+		return dataobject(obj.ticker, 'rsi', returnmatrix)
+	else:
+		print "Data is not of type 'dataobject'"
+		
+
+def RelativeStrengthIndex(prices, n):
     # close prices, no. of days
     deltas = np.diff(prices)
     seed = deltas[:n+1]

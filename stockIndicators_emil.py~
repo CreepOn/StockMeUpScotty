@@ -5,7 +5,6 @@ from dataobject import *
 #Stocastic Oscillator
 
 def SO(obj, period, ave):
-	
 	if isinstance(obj, dataobject):
 		K=[]
 		D=[]
@@ -19,10 +18,6 @@ def SO(obj, period, ave):
 			D=movingAverage(K, ave)
 		else:
 			print "Object type is not 'raw' or 'candlestick'."
-		#returnlist=movingAverage(datalist, timeFrame)
-		print "length " + str(length)
-		print "K " + str(len(K))
-		print "D " + str(len(D))
 		returnmatrix=np.concatenate([obj.data[period+ave-2:,0], np.matrix(K[ave-1:]).transpose(),np.matrix(D).transpose()],axis=1)
 		
 		return dataobject(obj.ticker, 'sto osc', returnmatrix)
@@ -514,7 +509,23 @@ def centerOfGravity(dates, data, timeFrame):
 
 # Relative Strength Index - RSI
 
-def RSI(prices, n):
+def RSI(obj, days):
+	returnlist=[]
+	datalist=[]
+	if isinstance(obj, dataobject):
+		if obj.category == "raw" or obj.category == "candlestick":
+			datalist=obj.data[:,2].transpose().tolist()[0]			
+		else:
+			datalist=obj.data[:,1].transpose().tolist()[0]
+		returnlist=movingAverage(datalist, days)
+		returnmatrix=np.concatenate((obj.data[:,0], np.matrix(returnlist).transpose()),axis=1)
+		
+		return dataobject(obj.ticker, 'rsi', returnmatrix)
+	else:
+		print "Data is not of type 'dataobject'"
+		
+
+def RelativeStrengthIndex(prices, n):
     # close prices, no. of days
     deltas = np.diff(prices)
     seed = deltas[:n+1]

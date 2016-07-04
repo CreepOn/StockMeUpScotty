@@ -16,6 +16,8 @@ os.system('clear')
 
 ticker='TSLA'
 
-ld=dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker,100)))
+ld=getDataObject(ticker,100)
 
-print SO(ld, 14,3).data[:,1:]
+rss=RSI(ld, 20)
+print rss
+#print SO(ld, 14,3).data[:,1:]

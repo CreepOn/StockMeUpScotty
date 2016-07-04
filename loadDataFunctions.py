@@ -3,10 +3,15 @@ from pylab import *
 from datetime import *
 import numpy as np
 import json
+from dataobject import *
 
 whiteFont="\033[0m"
 greenFont="\033[92m"
 redFont="\033[91m"
+
+def getDataObject(ticker, days):
+	return dataobject(ticker, 'raw', JsonToMatrix(getHistoricalData(ticker,days)))
+
 
 def JsonToList(hist):
 	data = []

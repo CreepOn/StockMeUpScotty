@@ -55,7 +55,7 @@ def movAveAna(obj, slowMovDays, fastMovDays):
 
 tickers=get_C20()
 for i in range(0,len(tickers)):
-	listdata=dataobject(tickers[i], 'raw', JsonToMatrix(getHistoricalData(tickers[i],400)))
+	listdata=getDataObject(tickers[i],400)
 
 	gc,dc,df=movAveAna(listdata,200,50)
 
