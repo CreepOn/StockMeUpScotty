@@ -18,6 +18,6 @@ ticker='TSLA'
 
 ld=getDataObject(ticker,100)
 
-rss=RSI(ld, 20)
+rss=RSI(ld, 14)
 print rss
 #print SO(ld, 14,3).data[:,1:]
