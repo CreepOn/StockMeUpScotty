@@ -84,17 +84,24 @@ def plot_single_data(Pfeat,*args):
 				else:
 					ax_count+=1
 					ax.append(plt.subplot2grid((Pfeat.sub_plot_types,1), (ax_count,0), rowspan=1,colspan=1, sharex=ax[0]))
+			ax[ax_count].grid(b=True, which='major', color='#dddddd', linestyle='-')
 			ax[ax_count].set_title(args[i].category, size=10)
-			linemax = [70] * len(args[i].data[:,0])
-			linemin = [30] * len(args[i].data[:,0])
-			ax[ax_count].plot(args[i].data[:,0],linemax,'--r',args[i].data[:,0],linemin,'--c')
+			#linemax = [70] * len(args[i].data[:,0])
+			#linemin = [30] * len(args[i].data[:,0])
+			ax[ax_count].axhline(y=70,ls='--',color='r')
+			ax[ax_count].axhline(y=30,ls='--',color='c')
+			#ax[ax_count].plot(args[i].data[:,0],linemax,'--r',args[i].data[:,0],linemin,'--c')
 			ax[ax_count].plot(args[i].data[:,0],args[i].data[:,1],'-g')
 			ax[ax_count].set_ylim((0,100))
-				
+			
+
 		if 'mov avg' in args[i].category:
 			#linemax = [250] * len(args[i].data[:,0])
 			#linemin = [220] * len(args[i].data[:,0])
+			ax[0].grid(b=True, which='major', color='#dddddd', linestyle='-')
 			ax[0].plot(args[i].data[:,0],args[i].data[:,1],'r')
+					
+
 
 	
 	print len(ax)
