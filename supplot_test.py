@@ -88,13 +88,13 @@ def plot_single_data(Pfeat,*args):
 			linemax = [70] * len(args[i].data[:,0])
 			linemin = [30] * len(args[i].data[:,0])
 			ax[ax_count].plot(args[i].data[:,0],linemax,'--r',args[i].data[:,0],linemin,'--c')
-			ax[ax_count].plot(args[i].data[:,0],args[i].data[:,1]*0.1,'-g')
+			ax[ax_count].plot(args[i].data[:,0],args[i].data[:,1],'-g')
 			ax[ax_count].set_ylim((0,100))
 				
 		if 'mov avg' in args[i].category:
 			#linemax = [250] * len(args[i].data[:,0])
 			#linemin = [220] * len(args[i].data[:,0])
-			ax[0].plot(args[i].data[:,0],args[i].data[:,1],'--r')
+			ax[0].plot(args[i].data[:,0],args[i].data[:,1],'r')
 
 	
 	print len(ax)

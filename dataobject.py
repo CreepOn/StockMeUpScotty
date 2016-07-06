@@ -8,7 +8,10 @@ class dataobject:
 		return self.category
 	def __str__(self):
 		return "ticker: "+ self.ticker +  "\ncategory: " + self.category + '\ndescription: ' + str(list(self.description)) + '\ndata: ' + str(self.data)
-		
+	
+	def set_category(self, Category):
+		self.category=Category	
+	
 	def __init__(self, Ticker, Category):
 		self.ticker = Ticker
 		self.category=Category
