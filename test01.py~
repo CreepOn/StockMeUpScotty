@@ -7,7 +7,7 @@ from stockIndicators_emil import *
 from plots import *
 from dataobject import *
 from pylab import *
-#from supplot_test import *
+from supplot_test import *
 
 whiteFont="\033[0m"
 greenFont="\033[92m"
