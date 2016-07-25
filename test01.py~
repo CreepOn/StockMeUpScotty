@@ -19,7 +19,7 @@ ticker='HTRO.ST'
 
 ld=getDataObject(ticker,100)
 
-ld.prt()
+print ld
 
 soo=SO(ld, 14, 3)
 

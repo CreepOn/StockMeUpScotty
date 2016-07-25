@@ -54,7 +54,8 @@ def getHistoricalData(ticker, daysAgo):
 	data=yahoo.get_historical(dateDaysAgo(daysAgo), today())
 	try:
 		empty={}
-		#element={'Volume': yahoo.get_volume(), 'Symbol': ticker, 'High': yahoo.get_days_high(), 'Low': yahoo.get_days_low(), 'Open': yahoo.get_open(), 'Close': yahoo.get_prev_close(), 'Date': yahoo.get_trade_datetime()[0:10]}
+		element={'Volume': yahoo.get_volume(), 'Symbol': ticker, 'High': yahoo.get_days_high(), 'Low': yahoo.get_days_low(), 'Open': yahoo.get_open(), 'Close': yahoo.get_price(), 'Date': yahoo.get_trade_datetime()[0:10]}
+		data.append(element)
 	except ValueError:
 		print "LALALA"
 	

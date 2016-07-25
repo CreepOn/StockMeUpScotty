@@ -55,7 +55,7 @@ def movAveAna(obj, slowMovDays, fastMovDays):
 
 #ticker='DENERG.CO'
 
-tickers=['FLS.CO']#get_C20()
+tickers=['TSLA']#get_C20()
 for i in range(0,len(tickers)):
 	listdata=getDataObject(tickers[i],400)
 	SMA200=SMA(listdata, 50)
@@ -85,8 +85,8 @@ for i in range(0,len(tickers)):
 			except:
 				print "empty"
 	print "---------------------------------------"
-	
+
 Plot(SMA200,RSIdat,SMA50)
 	
-	
+
 
