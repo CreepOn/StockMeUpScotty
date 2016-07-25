@@ -46,17 +46,17 @@ def dateDaysAgo(timeGone):
 	return then
 
 def getHistoricalData(ticker, daysAgo):
-	#try:
-	yahoo = Share(ticker)
-	data=yahoo.get_historical(dateDaysAgo(daysAgo), today())
-	
-	#except ValueError:
-	#	print "Error occured" + str(ValueError)
+	try:
+		yahoo = Share(ticker)
+	except ValueError:
+		print "Error occured" + str(ValueError)
 		
-	
+	data=yahoo.get_historical(dateDaysAgo(daysAgo), today())
 	try:
 		empty={}
-		#element={'Volume': yahoo.get_volume(), 'Symbol': ticker, 'High': yahoo.get_days_high(), 'Low': yahoo.get_days_low(), 'Open': yahoo.get_open(), 'Close': yahoo.get_prev_close(), 'Date': yahoo.get_trade_datetime()[0:10]}
+		element={'Volume': yahoo.get_volume(), 'Symbol': ticker, 'High': yahoo.get_days_high(), 'Low': yahoo.get_days_low(), 'Open': yahoo.get_open(), 'Close': yahoo.get_price(), 'Date': yahoo.get_trade_datetime()[0:10]}
+		data.append(element)
+		print data
 	except ValueError:
 		print "LALALA"
 	

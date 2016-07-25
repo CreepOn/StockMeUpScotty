@@ -15,15 +15,15 @@ redFont="\033[91m"
 
 #os.system('clear')
 
-ticker='HTRO.ST'
+ticker='TSLA'
 
 ld=getDataObject(ticker,100)
 
+print ld
 
 soo=SO(ld, 14, 3)
 
 rsii=RSI(ld, 14)
-
 
 smaa1=SMA(ld,2)
 
@@ -32,3 +32,5 @@ Plot(rsii, soo, smaa1)
 
 #print SO(ld, 14,3).data[:,1:]
 print "end"
+#Plot(rsii, smaa1, soo)
+

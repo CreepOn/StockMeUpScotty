@@ -19,15 +19,14 @@ ticker='HTRO.ST'
 
 ld=getDataObject(ticker,100)
 
+print ld
 
 soo=SO(ld, 14, 3)
 
 rsii=RSI(ld, 14)
 
-
 smaa1=SMA(ld,2)
 
 
-Plot(rsii, smaa1)
+#Plot(rsii, smaa1, soo)
 
-#print SO(ld, 14,3).data[:,1:]
