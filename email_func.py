@@ -28,3 +28,4 @@ def SendMail(ImgFileName):
     s.sendmail('anders@a-greve.dk', 'halborg35@hotmail.com', msg.as_string())
     s.sendmail('anders@a-greve.dk', 'anders@agtech.dk', msg.as_string())
     s.quit()
+
