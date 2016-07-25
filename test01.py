@@ -28,6 +28,6 @@ rsii=RSI(ld, 14)
 smaa1=SMA(ld,2)
 
 
-Plot(rsii, smaa1)
+Plot(rsii, smaa1, soo)
 
 #print SO(ld, 14,3).data[:,1:]
