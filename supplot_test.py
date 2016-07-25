@@ -94,12 +94,13 @@ def plot_single_data(Pfeat,*args):
 			ax[ax_count].plot(args[i].data[:,0],args[i].data[:,1],'-g')
 			ax[ax_count].set_ylim((0,100))
 			
-
+		graphcolor=['r','g','b','c','k']
 		if 'mov avg' in args[i].category:
 			#linemax = [250] * len(args[i].data[:,0])
 			#linemin = [220] * len(args[i].data[:,0])
 			ax[0].grid(b=True, which='major', color='#dddddd', linestyle='-')
-			ax[0].plot(args[i].data[:,0],args[i].data[:,1],'r')
+			ax[0].plot(args[i].data[:,0],args[i].data[:,1],graphcolor[i])
+#			ax[0].plot(args[i].data[:,0],args[i].data[:,1],'r')
 					
 
 
@@ -112,9 +113,10 @@ def plot_single_data(Pfeat,*args):
 		new_xticks.append(ele.strftime("%d.%m.%y"))
 	
 	ax[len(ax)-1].set_xticklabels(new_xticks,rotation=0, horizontalalignment='right')
-	#plt.setp( plt.gca().get_xticklabels(), rotation=45, horizontalalignment='right')
-	#plt.tight_layout()
-	savefig(args[0].ticker+'_single_data'+'.pdf', facecolor='gray', edgecolor='gray')#fig.get_facecolor()
+	plt.setp( plt.gca().get_xticklabels(), rotation=45, horizontalalignment='right', size=10)
+#	plt.tight_layout()
+	plt.show()
+	#savefig(args[0].ticker+'_single_data'+'.pdf', facecolor='gray', edgecolor='gray')#fig.get_facecolor()
 
 def Plot(*args):
 

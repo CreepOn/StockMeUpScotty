@@ -7,6 +7,8 @@ from stockIndicators_emil import *
 from plots import *
 from dataobject import *
 from pylab import *
+from supplot_test import *
+
 
 whiteFont="\033[0m"
 greenFont="\033[92m"
@@ -53,11 +55,13 @@ def movAveAna(obj, slowMovDays, fastMovDays):
 
 #ticker='DENERG.CO'
 
-tickers=get_C20()
+tickers=['FLS.CO']#get_C20()
 for i in range(0,len(tickers)):
 	listdata=getDataObject(tickers[i],400)
-
-	gc,dc,df=movAveAna(listdata,200,50)
+	SMA200=SMA(listdata, 50)
+	SMA50=SMA(listdata, 20)
+	RSIdat=RSI(listdata, 14)
+	gc,dc,df=movAveAna(listdata,50,20)
 
 	print "           "+'-'*(len(df.ticker) +4)
 	print "           "+"| " + str(df.ticker) + " |"
@@ -65,20 +69,24 @@ for i in range(0,len(tickers)):
 
 	if len(gc.tolist())>0:
 		print "golden cross: "
-		for ele in gc:
+		for ele in gc.tolist()[0]:
 			try:
 				hel=int(ele)
-				print str(num2date(int(hel)))
+				print str(num2date(int(hel)))[0:10]
 			except:
 				print "empty"
 	if len(dc)>0:
 		
 		print "death cross: "
-		for ele in dc:
+		for ele in dc.tolist()[0]:
 			try:
 				hel=int(ele)
-				print str(num2date(int(hel)))
+				print str(num2date(int(hel)))[0:10]
 			except:
 				print "empty"
 	print "---------------------------------------"
+	
+Plot(SMA200,SMA50, RSIdat)
+	
+	
 

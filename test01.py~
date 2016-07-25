@@ -6,7 +6,7 @@ import numpy as np
 from stockIndicators_emil import *
 from plots import *
 from dataobject import *
-#from pylab import *
+from pylab import *
 from supplot_test import *
 
 whiteFont="\033[0m"
@@ -19,15 +19,14 @@ ticker='HTRO.ST'
 
 ld=getDataObject(ticker,100)
 
+ld.prt()
 
 soo=SO(ld, 14, 3)
 
 rsii=RSI(ld, 14)
 
-
 smaa1=SMA(ld,2)
 
 
-Plot(rsii, smaa1, soo)
+#Plot(rsii, smaa1, soo)
 
-#print SO(ld, 14,3).data[:,1:]

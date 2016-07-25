@@ -1,13 +1,19 @@
 import numpy as np
+from pylab import *
 from datetime import datetime
 from datetime import date
 import time
+
 
 class dataobject:
 	def __repr__(self):
 		return self.category
 	def __str__(self):
-		return "ticker: "+ self.ticker +  "\ncategory: " + self.category + '\ndescription: ' + str(list(self.description)) + '\ndata: ' + str(self.data)
+		datestr=[]
+		for ele in self.data[:,0]:
+			datestr.append(str(num2date(int(ele)))[0:10])
+		mat = np.concatenate([np.matrix(datestr).transpose(), self.data[:,1:]],axis=1)
+		return "ticker: "+ self.ticker +  "\ncategory: " + self.category + '\ndescription: ' + str(list(self.description)) + '\ndata: ' + str(mat)#str(self.data)
 	
 	def set_category(self, Category):
 		self.category=Category	
