@@ -7,6 +7,7 @@ from stockIndicators_emil import *
 from plots import *
 from dataobject import *
 from pylab import *
+#from supplot_test import *
 
 whiteFont="\033[0m"
 greenFont="\033[92m"
@@ -18,6 +19,15 @@ ticker='TSLA'
 
 ld=getDataObject(ticker,100)
 
-rss=RSI(ld, 14)
-print rss.data[:,1]
+
+soo=SO(ld, 14, 3)
+
+rsii=RSI(ld, 14)
+
+
+smaa1=SMA(ld,2)
+
+
+Plot(rsii, smaa1)
+
 #print SO(ld, 14,3).data[:,1:]

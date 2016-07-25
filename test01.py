@@ -15,7 +15,7 @@ redFont="\033[91m"
 
 os.system('clear')
 
-ticker='HTRO.ST'
+ticker='TSLA'
 
 ld=getDataObject(ticker,100)
 
