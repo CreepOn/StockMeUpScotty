@@ -139,8 +139,8 @@ def plot_single_data(Pfeat,*args):
 	ax[len(ax)-1].set_xticklabels(new_xticks,rotation=0, horizontalalignment='right')
 	plt.setp( plt.gca().get_xticklabels(), rotation=45, horizontalalignment='right', size=10)
 #	plt.tight_layout()
-	plt.show()
-	#savefig(args[0].ticker+'_single_data'+'.pdf', facecolor='gray', edgecolor='gray')#fig.get_facecolor()
+	#plt.show()
+	savefig(args[0].ticker+'_single_data'+'.pdf', facecolor='gray', edgecolor='gray')#fig.get_facecolor()
 
 def Plot(*args):
 
