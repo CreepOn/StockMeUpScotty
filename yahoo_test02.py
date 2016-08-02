@@ -58,7 +58,7 @@ def movAveAna(obj, slowMovDays, fastMovDays):
 tickers=get_C20()
 for i in range(0,len(tickers)):
 	print tickers[i]
-	listdata=getDataObject(tickers[i],400)
+	listdata=getDataObject(tickers[i],800)
 	SMA200=SMA(listdata, 200)
 	SMA50=SMA(listdata, 50)
 	SMA20=SMA(listdata, 20)
