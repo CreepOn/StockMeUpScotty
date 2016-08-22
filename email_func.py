@@ -11,9 +11,9 @@ def SendMail(ImgFileName):
     msg['From'] = 'anders@a-greve.dk'
     msg['To'] = 'mr.a.greve@gmail.com '
     pdfAttachment = MIMEApplication(ImgFileName, _subtype = "pdf")
-    pdfAttachment.add_header('content-disposition', 'attachment', filename = ('utf-8', '', 'payment.pdf'))
+    pdfAttachment.add_header('content-disposition', 'attachment', filename = ('utf-8', '', 'C20Stocks.pdf'))
 	
-    text = MIMEText("Send via python, dog ikke via Pi")
+    text = MIMEText("C20 Test. Mvh. Emil")
     msg.attach(text)
     #image = MIMEImage(img_data, name=os.path.basename(ImgFileName))
     #msg.attach(image)

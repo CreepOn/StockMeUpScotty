@@ -2,27 +2,36 @@ import numpy as np
 import time
 from dataobject import *
 
+
+whiteFont="\033[0m"
+greenFont="\033[92m"
+redFont="\033[91m"
+
+
 #Stocastic Oscillator
 
 def SO(obj, period, ave):
 	if isinstance(obj, dataobject):
-		K=[]
-		D=[]
-		length=len(obj.data[:,0])
-		if obj.category == "raw" or obj.category == "candlestick":
-			for i in range(period-1, length):
-				HIGH=max((obj.data[(1+i-period):(i+1),3]).tolist())[0]
-				LOW=min((obj.data[(1+i-period):(i+1),4]).tolist())[0]
-				CLOSE=obj.data[i,2]
-				K.append(100.0*(CLOSE-LOW)/(HIGH-LOW))
-			D=movingAverage(K, ave)
-		else:
-			print "Object type is not 'raw' or 'candlestick'."
-		returnmatrix=np.concatenate([obj.data[period+ave-2:,0], np.matrix(K[ave-1:]).transpose(),np.matrix(D).transpose()],axis=1)
+		try: 
+			K=[]
+			D=[]
+			length=len(obj.data[:,0])
+			if obj.category == "raw" or obj.category == "candlestick":
+				for i in range(period-1, length):
+					HIGH=max((obj.data[(1+i-period):(i+1),3]).tolist())[0]
+					LOW=min((obj.data[(1+i-period):(i+1),4]).tolist())[0]
+					CLOSE=obj.data[i,2]
+					K.append(100.0*(CLOSE-LOW)/(HIGH-LOW))
+				D=movingAverage(K, ave)
+			else:
+				print redFont+"Object type is not 'raw' or 'candlestick'."+whiteFont
+			returnmatrix=np.concatenate([obj.data[period+ave-2:,0], np.matrix(K[ave-1:]).transpose(),np.matrix(D).transpose()],axis=1)
 		
-		return dataobject(obj.ticker, 'sto osc', returnmatrix)
+			return dataobject(obj.ticker, 'sto osc', returnmatrix)
+		except:
+			print redFont + "Data object is empty."+whiteFont
 	else:
-		print "Data is not of type 'dataobject'"
+		print redFont+"Data is not of type 'dataobject'"+whiteFont
 
 
 '''
@@ -46,19 +55,22 @@ Read more: Stochastic Oscillator Definition | Investopedia http://www.investoped
 
 #Simple Moving Average - SMA
 def SMA(obj, timeFrame):
-	returnlist=[]
-	datalist=[]
-	if isinstance(obj, dataobject):
-		if obj.category == "raw" or obj.category == "candlestick":
-			datalist=obj.data[:,2].transpose().tolist()[0]			
-		else:
-			datalist=obj.data[:,1].transpose().tolist()[0]
-		returnlist=movingAverage(datalist, timeFrame)
-		returnmatrix=np.concatenate((obj.data[(timeFrame-2):-1,0], np.matrix(returnlist).transpose()),axis=1)
+	if len(obj.data) > timeFrame:
+		returnlist=[]
+		datalist=[]
+		if isinstance(obj, dataobject):
+			if obj.category == "raw" or obj.category == "candlestick":
+				datalist=obj.data[:,2].transpose().tolist()[0]			
+			else:
+				datalist=obj.data[:,1].transpose().tolist()[0]
+			returnlist=movingAverage(datalist, timeFrame)
+			returnmatrix=np.concatenate((obj.data[(timeFrame-2):-1,0], np.matrix(returnlist).transpose()),axis=1)
 		
-		return dataobject(obj.ticker, 'mov avg', returnmatrix)
+			return dataobject(obj.ticker, 'mov avg', returnmatrix)
+		else:
+			print redFont+"Data is not of type 'dataobject'"+whiteFont
 	else:
-		print "Data is not of type 'dataobject'"
+		print redFont+"Not enough elements in data object to make SMA. Decreaes window size or add more samples in data object."+whiteFont
 		
 def movingAverage (values, timeFrame):
     # close price, no. of days
@@ -513,16 +525,18 @@ def RSI(obj, days):
 	returnlist=[]
 	datalist=[]
 	if isinstance(obj, dataobject):
-		if obj.category == "raw" or obj.category == "candlestick":
-			datalist=obj.data[:,2].transpose().tolist()[0]			
-		else:
-			datalist=obj.data[:,1].transpose().tolist()[0]
-		returnlist=RelativeStrengthIndex(datalist, days)
-		returnmatrix=np.concatenate((obj.data[:,0], np.matrix(returnlist).transpose()),axis=1)
-		
-		return dataobject(obj.ticker, 'rsi', returnmatrix)
+		try:
+			if obj.category == "raw" or obj.category == "candlestick":
+				datalist=obj.data[:,2].transpose().tolist()[0]			
+			else:
+				datalist=obj.data[:,1].transpose().tolist()[0]
+			returnlist=RelativeStrengthIndex(datalist, days)
+			returnmatrix=np.concatenate((obj.data[:,0], np.matrix(returnlist).transpose()),axis=1)
+			return dataobject(obj.ticker, 'rsi', returnmatrix)
+		except:
+			print redFont + "Data object is empty."+whiteFont
 	else:
-		print "Data is not of type 'dataobject'"
+		print redFont+"Data is not of type 'dataobject'"+whiteFont
 		
 
 def RelativeStrengthIndex(prices, n):

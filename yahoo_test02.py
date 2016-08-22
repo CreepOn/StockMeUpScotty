@@ -55,38 +55,42 @@ def movAveAna(obj, slowMovDays, fastMovDays):
 
 #ticker='DENERG.CO'
 
-tickers=['TSLA']#get_C20()
+tickers=get_C20()
 for i in range(0,len(tickers)):
-	listdata=getDataObject(tickers[i],400)
-	SMA200=SMA(listdata, 50)
-	SMA50=SMA(listdata, 20)
+	print tickers[i]
+	listdata=getDataObject(tickers[i],800)
+	SMA200=SMA(listdata, 200)
+	SMA50=SMA(listdata, 50)
+	SMA20=SMA(listdata, 20)
 	RSIdat=RSI(listdata, 14)
-	gc,dc,df=movAveAna(listdata,50,20)
+	SOdat=SO(listdata, 14,3)
+	if len(listdata.data) > 50:
+		gc,dc,df=movAveAna(listdata,50,20)
 
-	print "           "+'-'*(len(df.ticker) +4)
-	print "           "+"| " + str(df.ticker) + " |"
-	print "           "+'-'*(len(df.ticker) +4)
+		print "           "+'-'*(len(df.ticker) +4)
+		print "           "+"| " + str(df.ticker) + " |"
+		print "           "+'-'*(len(df.ticker) +4)
 
-	if len(gc.tolist())>0:
-		print "golden cross: "
-		for ele in gc.tolist()[0]:
-			try:
-				hel=int(ele)
-				print str(num2date(int(hel)))[0:10]
-			except:
-				print "empty"
-	if len(dc)>0:
+		if len(gc.tolist())>0:
+			print "golden cross: "
+			for ele in gc.tolist()[0]:
+				try:
+					hel=int(ele)
+					print str(num2date(int(hel)))[0:10]
+				except:
+					print "empty"
+		if len(dc)>0:
 		
-		print "death cross: "
-		for ele in dc.tolist()[0]:
-			try:
-				hel=int(ele)
-				print str(num2date(int(hel)))[0:10]
-			except:
-				print "empty"
-	print "---------------------------------------"
-
-Plot(SMA200,RSIdat,SMA50)
+			print "death cross: "
+			for ele in dc.tolist()[0]:
+				try:
+					hel=int(ele)
+					print str(num2date(int(hel)))[0:10]
+				except:
+					print "empty"
+		print "---------------------------------------"
+	if len(listdata.data) > 200:
+		Plot(SMA200,SMA50, SMA20, SOdat, RSIdat)
 	
 
 
