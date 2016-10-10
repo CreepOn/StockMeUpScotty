@@ -1,3 +1,3 @@
 import email_func
 
-SendMail(lam.jpg)
+SendMail('lam.jpg')
